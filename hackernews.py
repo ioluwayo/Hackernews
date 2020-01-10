@@ -202,7 +202,24 @@ def scrape_posts(n):
     return json.dumps(posts, indent=2)
 
 
+def check_positive_int(val):
+
+    val = int(val)
+    if val < 0 or val > 100:
+        raise argparse.ArgumentTypeError("%s is an invalid positive int value" % value)
+    return val
+
+
 def main():
+    def validate_post_input(val):
+        try:
+            val = int(val)  # if not integer, will raise
+            if val < 0 or val > 100:
+                raise argparse.ArgumentTypeError(f"{val} is not in the range 0-100")
+        except ValueError:
+            raise argparse.ArgumentTypeError(f"invalid int value: '{val}'")
+        return val
+
     parser = argparse.ArgumentParser(
         description="This script scrapes https://news.ycombinator.com/ and prints to stdout the top posts"
         "The output is in json format"
@@ -210,11 +227,10 @@ def main():
     )
     parser.add_argument(
         "--posts",
-        type=int,
+        type=validate_post_input,
         metavar="n",
         required=True,
-        choices=range(0, 101),
-        help="The number of posts to display",
+        help="The number of posts to display. Value must be in the range 0-100",
     )
     parser.add_argument(
         "-v", "--verbose", help="sets logging level to debug", action="store_true"
