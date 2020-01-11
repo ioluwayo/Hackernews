@@ -9,9 +9,10 @@ docker run --name hackernews -d hackernews
 ```
 ##### To run/test the application
 
-1. ssh into the container.```docker exec -it hackernews```
+1. ssh into the container.```docker exec -it hackernews bash```
 2. To run tests, from within the /Hackernews directory execute commad ```python -m unittest test_hackernews.py -v``` 
-3. To run the application, from anywhere in the container, execute command ```hackernews --posts n```
+3. To run the application, from anywhere in the container, execute command ```hackernews --posts n``` 
+where n is an integer in the range 0-100. 
 4. To display help message, execute  ```hackernews --help```
 
 ##### Libraries used and why.

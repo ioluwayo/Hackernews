@@ -202,14 +202,6 @@ def scrape_posts(n):
     return json.dumps(posts, indent=2)
 
 
-def check_positive_int(val):
-
-    val = int(val)
-    if val < 0 or val > 100:
-        raise argparse.ArgumentTypeError("%s is an invalid positive int value" % value)
-    return val
-
-
 def main():
     def validate_post_input(val):
         try:
@@ -221,9 +213,9 @@ def main():
         return val
 
     parser = argparse.ArgumentParser(
-        description="This script scrapes https://news.ycombinator.com/ and prints to stdout the top posts"
-        "The output is in json format"
-        "Sample usage: hackernews --posts n"
+        description="This script scrapes https://news.ycombinator.com/ and prints to stdout the top posts. "
+        "The output is in json format. "
+        "Sample usage: hackernews --posts 10"
     )
     parser.add_argument(
         "--posts",
